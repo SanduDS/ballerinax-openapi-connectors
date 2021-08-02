@@ -16,21 +16,15 @@
 
 # A paginated list of issue comments
 public type PaginatedIssueComments record {
-    # Total number of objects in the response. This is an optional element that is not provided in all responses, 
-    # as it can be expensive to compute
+    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute
     int size?;
     # Page number of the current results. This is an optional element that is not provided in all responses
     int page?;
-    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. 
-    # Individual APIs may enforce different values
+    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values
     int pagelen?;
-    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs
+    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs
     string next?;
-    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element 
-    # that is not provided in all responses. Some result sets strictly support forward navigation and never provide 
-    # previous links. Clients must anticipate that backwards navigation is not always available. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs
+    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs
     string previous?;
     # An array of issue comment objects returned by the operation
     IssueComment[] values?;
@@ -42,11 +36,9 @@ public type Account record {
     Links links?;
     # Username of the account
     string username?;
-    # Account name defined by the owner. Should be used instead of the "username" field. Note that "nickname" cannot be 
-    # used in place of "username" in URLs and queries, as "nickname" is not guaranteed to be unique.
+    # Account name defined by the owner. Should be used instead of the "username" field. Note that "nickname" cannot be used in place of "username" in URLs and queries, as "nickname" is not guaranteed to be unique.
     string nickname?;
-    # The status of the account. Currently the only possible value is "active", but more values may be added in the 
-    # future
+    # The status of the account. Currently the only possible value is "active", but more values may be added in the future
     string account_status?;
     # Display name of the account
     string display_name?;
@@ -64,7 +56,7 @@ public type Description record {
     # The text as it was typed by a user
     string raw?;
     # The type of markup language the raw content is to be interpreted in.
-    string markup?;
+    DescriptionMarkup markup?;
     # The user's content rendered as HTML
     string html?;
 };
@@ -99,9 +91,9 @@ public type Issue record {
     # The last edited date/time of the issue
     string? edited_on?;
     # The state of the issue
-    string state?;
+    IssueState state?;
     # The kind of the issue
-    string kind?;
+    IssueKind kind?;
     # The priority level of the issue
     string priority?;
     # The milestone of the issue
@@ -116,13 +108,25 @@ public type Issue record {
     Content content?;
 };
 
-# A pull request detail
+# A paginated list of pullrequests.
+public type PaginatedPullrequests record {
+    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.
+    int size?;
+    # Page number of the current results. This is an optional element that is not provided in all responses.
+    int page?;
+    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.
+    int pagelen?;
+    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.
+    string next?;
+    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.
+    string previous?;
+    # An Array of Pull requests
+    Pullrequest[] values?;
+};
+
 public type PullrequestEndpoint record {
-    # Repository detail
     Repository repository?;
-    # The branch of the pull request
     PullrequestBranch branch?;
-    # The commit hash value  of the pull request
     PullrequestCommit 'commit?;
 };
 
@@ -130,7 +134,7 @@ public type Reason record {
     # The text as it was typed by a user
     string raw?;
     # The type of markup language the raw content is to be interpreted in.
-    string markup?;
+    ReasonMarkup markup?;
     # The user's content rendered as HTML
     string html?;
 };
@@ -145,6 +149,7 @@ public type Rendered record {
     Reason reason?;
 };
 
+
 # The error detail
 public type ErrorDetail record {
     # The error message
@@ -153,9 +158,7 @@ public type ErrorDetail record {
     string detail?;
 };
 
-# Pull Request commit hash value
 public type PullrequestCommit record {
-    # The hash value of the commit
     string hash?;
 };
 
@@ -196,28 +199,20 @@ public type Component record {
 
 # A paginated list of repositories.
 public type PaginatedRepositories record {
-    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it 
-    # can be expensive to compute.
+    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.
     int size?;
     # Page number of the current results. This is an optional element that is not provided in all responses.
     int page?;
-    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. 
-    # Individual APIs may enforce different values.
+    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.
     int pagelen?;
-    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs.
+    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.
     string next?;
-    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element 
-    # that is not provided in all responses. Some result sets strictly support forward navigation and never provide 
-    # previous links. Clients must anticipate that backwards navigation is not always available. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs.
+    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.
     string previous?;
-    # An array of repositories
+    # An array of Repositories
     Repository[] values?;
 };
 
-# An array of clones links
-#  
 public type Clone Link[];
 
 # The pull request commit
@@ -226,8 +221,7 @@ public type MergeCommit record {
     string hash?;
 };
 
-# The base type for all comments. This type should be considered abstract. Each of the "commentable" resources defines 
-# its own subtypes (e.g. `issue_comment`).
+# The base type for all comments. This type should be considered abstract. Each of the "commentable" resources defines its own subtypes (e.g.`issue_comment`).
 public type Comment record {
     # The ID of the comment
     int id?;
@@ -263,13 +257,12 @@ public type Title record {
     # The text as it was typed by a user
     string raw?;
     # The type of markup language the raw content is to be interpreted in
-    string markup?;
+    TitleMarkup markup?;
     # The user's content rendered as HTML
     string html?;
 };
 
-# Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also 
-# identifies the element as Swagger's `discriminator`.
+# Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.
 public type Error record {
     # The type of the error
     string 'type;
@@ -279,8 +272,7 @@ public type Error record {
 
 # The comment's anchor line detail
 public type Inline record {
-    # The comment's anchor line in the new version of the file. If the 'from' line is also provided, this value will be 
-    # removed.
+    # The comment's anchor line in the new version of the file. If the 'from' line is also provided, this value will be removed.
     int to?;
     # The comment's anchor line in the old version of the file.
     int 'from?;
@@ -290,21 +282,15 @@ public type Inline record {
 
 # A paginated list of issues.
 public type PaginatedIssues record {
-    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it 
-    # can be expensive to compute
+    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute
     int size?;
     # Page number of the current results. This is an optional element that is not provided in all responses
     int page?;
-    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. 
-    # Individual APIs may enforce different values
+    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values
     int pagelen?;
-    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs
+    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs
     string next?;
-    # Link to previous page if it exists. A collections first page does not have this value. This is an optional 
-    # element that is not provided in all responses. Some result sets strictly support forward navigation and never 
-    # provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link 
-    # to navigate the result set and refrain from constructing your own URLs
+    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs
     string previous?;
     # An array of issues
     Issue[] values?;
@@ -332,8 +318,7 @@ public type Project record {
     string name?;
     # The project description
     string description?;
-    # Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only 
-    # visible to team members. Note that private projects cannot contain public repositories.
+    # Indicates whether the project is publicly accessible, or whether it is private to the team and consequently only visible to team members. Note that private projects cannot contain public repositories.
     boolean is_private?;
     # The created date/time of the project
     string created_on?;
@@ -353,16 +338,13 @@ public type Ref record {
     Commit target?;
 };
 
-# A Bitbucket repository.
+# A Bitbucket repository
 public type Repository record {
     # links to a resource related to comment object.
     Links links?;
-    # The repository's immutable id. This can be used as a substitute for the slug segment in URLs. Doing this 
-    # guarantees your URLs will survive renaming of the repository by its owner, or even transfer of the repository to a 
-    # different user
+    # The repository's immutable id. This can be used as a substitute for the slug segment in URLs. Doing this guarantees your URLs will survive renaming of the repository by its owner, or even transfer of the repository to a different user
     string uuid?;
-    # The concatenation of the repository owner's username and the slugified name, e.g. "evzijst/interruptingcow". This 
-    # is the same string used in Bitbucket URLs
+    # The concatenation of the repository owner's username and the slugified name, e.g. "evzijst/interruptingcow". This is the same string used in Bitbucket URLs
     string full_name?;
     # Indicates whether the repository is private
     boolean is_private?;
@@ -388,9 +370,8 @@ public type Repository record {
     boolean has_issues?;
     # Indicates whether repository has a wiki
     boolean has_wiki?;
-    # Controls the rules for forking this repository. ()allow_forks)-unrestricted forking (no_public_forks) - restrict 
-    # forking to private forks (forks cannot be made public later) (no_forks) -deny all forking
-    string fork_policy?;
+    # Controls the rules for forking this repository. ()allow_forks)-unrestricted forking (no_public_forks) - restrict forking to private forks (forks cannot be made public later) (no_forks) -deny all forking
+    RepositoryForkPolicy fork_policy?;
     # The related project
     Project project?;
     # The main branch
@@ -411,14 +392,12 @@ public type Participant record {
     # The user detail
     User user?;
     # The type of the participant
-    string role?;
+    ParticipantRole role?;
     # Indicates whether participant is approved
     boolean approved?;
     # The state of the participant
-    string state?;
-    # The ISO8601 timestamp of the participant's action. For approvers, this is the time of their approval. For 
-    # commenters and pull request reviewers who are not approvers, this is the time they last commented, or null if they 
-    # have not commented.
+    ParticipantState state?;
+    # The ISO8601 timestamp of the participant's action. For approvers, this is the time of their approval. For commenters and pull request reviewers who are not approvers, this is the time they last commented, or null if they have not commented.
     string participated_on?;
 };
 
@@ -443,7 +422,7 @@ public type Content record {
     # The text as it was typed by a user.
     string raw?;
     # The type of markup language the raw content is to be interpreted in.
-    string markup?;
+    ContentMarkup markup?;
     # The user's content rendered as HTML
     string html?;
 };
@@ -457,43 +436,43 @@ public type IssueComment record {
 
 # links to a resource related to comment object.
 public type Links record {
-    # A link to comment related to this object.
+    # A link to a resource related to this object.
     Link self?;
-    # A link to html resource related to this object.
+    # A link to a resource related to this object.
     Link html?;
-    # A link to code related to this object.
+    # A link to a resource related to this object.
     Link code?;
-    # A link to commits related to this object.
+    # A link to a resource related to this object.
     Link commits?;
-    # A link to approve resource related to this object.
+    # A link to a resource related to this object.
     Link approve?;
-    # A link to a diff resource related to this object.
+    # A link to a resource related to this object.
     Link diff?;
-    # A link to diff stat resource related to this object.
+    # A link to a resource related to this object.
     Link diffstat?;
-    # A link to comments related to this object.
+    # A link to a resource related to this object.
     Link comments?;
-    # A link to a activity resource related to this object.
+    # A link to a resource related to this object.
     Link activity?;
-    # A link to a merge resource related to this object.
+    # A link to a resource related to this object.
     Link merge?;
-    # A link to a decline resource related to this object.
+    # A link to a resource related to this object.
     Link decline?;
     # The name of the related object
     string name?;
-    # A link to a avatar resource related to this object.
+    # A link to a resource related to this object.
     Link avatar?;
-    # A link to followers resource related to this object.
+    # A link to a resource related to this object.
     Link followers?;
-    # A link to following resource related to this object.
+    # A link to a resource related to this object.
     Link following?;
-    # A link to repositories resource related to this object.
+    # A link to a resource related to this object.
     Link repositories?;
-    # A link to pullrequests resource related to this object.
+    # A link to a resource related to this object.
     Link pullrequests?;
-    # A link to forks resource related to this object.
+    # A link to a resource related to this object.
     Link forks?;
-    # A link to hooks resource related to this object.
+    # A link to a resource related to this object.
     Link watchers?;
     # A link to a resource related to this object.
     Link downloads?;
@@ -501,19 +480,19 @@ public type Links record {
     Clone clone?;
     # A link to a resource related to this object.
     Link hooks?;
-    # A link to attachments resource related to this object.
+    # A link to a resource related to this object.
     Link attachments?;
-    # A link to watch resource related to this object.
+    # A link to a resource related to this object.
     Link watch?;
-    # A link to vote resource related to this object.
+    # A link to a resource related to this object.
     Link vote?;
-    # A link to members resource related to this object.
+    # A link to a resource related to this object.
     Link members?;
-    # A link to owners resource related to this object.
+    # A link to a resource related to this object.
     Link owners?;
-    # A link to projects resource related to this object.
+    # A link to a resource related to this object.
     Link projects?;
-    # A link to snippets resource related to this object.
+    # A link to a resource related to this object.
     Link snippets?;
 };
 
@@ -522,25 +501,17 @@ public type Summary record {
     # The text as it was typed by a user
     string raw?;
     # The type of markup language the raw content is to be interpreted in.
-    string markup?;
+    SummaryMarkup markup?;
     # The user's content rendered as HTML
     string html?;
 };
 
 # The author of a change in a repository
 public type Author record {
-    # The raw author value from the repository. This may be the only value available if the author does not match a user 
-    # in Bitbucket
+    # The raw author value from the repository. This may be the only value available if the author does not match a user in Bitbucket
     string raw?;
     # The user details
     Account user?;
-};
-
-# Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also 
-# identifies the element as Swagger's `discriminator`.
-public type Object record {
-    # It defines the common `type` element that identifies an object's type and the element as Swagger's `discriminator`
-    string 'type?;
 };
 
 # A link to a resource related to this object.
@@ -605,31 +576,105 @@ public type Pullrequest record {
     string created_on?;
     # The ISO8601 timestamp the request was last updated
     string updated_on?;
-    # The list of users that were added as reviewers on this pull request when it was created. For performance reasons, 
-    # the API only includes this list on a pull request's `self` URL.
+    # The list of users that were added as reviewers on this pull request when it was created. For performance reasons, the API only includes this list on a pull request's `self` URL.
     Account[] reviewers?;
     # The list of users that are collaborating on this
     Participant[] participants?;
 };
 
-# A paginated list of pullrequests.
-public type PaginatedPullrequests record {
-    # Total number of objects in the response. This is an optional element that is not provided in all responses, as it 
-    # can be expensive to compute.
-    int size?;
-    # Page number of the current results. This is an optional element that is not provided in all responses.
-    int page?;
-    # Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. 
-    # Individual APIs may enforce different values.
-    int pagelen?;
-    # Link to the next page if it exists. The last page of a collection does not have this value. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs.
-    string next?;
-    # Link to previous page if it exists. A collections first page does not have this value. This is an optional element 
-    # that is not provided in all responses. Some result sets strictly support forward navigation and never provide 
-    # previous links. Clients must anticipate that backwards navigation is not always available. Use this link to 
-    # navigate the result set and refrain from constructing your own URLs.
-    string previous?;
-    # a List of pull request
-    Pullrequest[] values?;
-};
+public enum ListWorkspacesRole {
+    LISTWORKSPACESROLE_ADMIN = "admin",
+    LISTWORKSPACESROLE_CONTRIBUTOR = "contributor",
+    LISTWORKSPACESROLE_MEMBER = "member",
+    LISTWORKSPACESROLE_OWNER = "owner"
+}
+
+public enum ListPullrequetsState {
+    LISTPULLREQUETSSTATE_MERGED = "MERGED",
+    LISTPULLREQUETSSTATE_SUPERSEDED = "SUPERSEDED",
+    LISTPULLREQUETSSTATE_OPEN = "OPEN",
+    LISTPULLREQUETSSTATE_DECLINED = "DECLINED"
+}
+
+public enum DescriptionMarkup {
+    DESCRIPTIONMARKUP_MARKDOWN = "markdown",
+    DESCRIPTIONMARKUP_CREOLE = "creole",
+    DESCRIPTIONMARKUP_PLAINTEXT = "plaintext"
+}
+
+public enum IssueState {
+    ISSUESTATE_NEW = "new",
+    ISSUESTATE_OPEN = "open",
+    ISSUESTATE_RESOLVED = "resolved",
+    ISSUESTATE_ONHOLD = "on hold",
+    ISSUESTATE_INVALID = "invalid",
+    ISSUESTATE_DUPLICATE = "duplicate",
+    ISSUESTATE_WONTFIX = "wontfix",
+    ISSUESTATE_CLOSED = "closed"
+}
+
+public enum IssueKind {
+    ISSUEKIND_BUG = "bug",
+    ISSUEKIND_ENHANCEMENT = "enhancement",
+    ISSUEKIND_PROPOSAL = "proposal",
+    ISSUEKIND_TASK = "task"
+}
+
+public enum IssuePriority {
+    ISSUEPRIORITY_TRIVIAL = "trivial",
+    ISSUEPRIORITY_MINOR = "minor",
+    ISSUEPRIORITY_MAJOR = "major",
+    ISSUEPRIORITY_CRITICAL = "critical",
+    ISSUEPRIORITY_BLOCKER = "blocker"
+}
+
+public enum ReasonMarkup {
+    REASONMARKUP_MARKDOWN = "markdown",
+    REASONMARKUP_CREOLE = "creole",
+    REASONMARKUP_PLAINTEXT = "plaintext"
+}
+
+public enum TitleMarkup {
+    TITLEMARKUP_MARKDOWN = "markdown",
+    TITLEMARKUP_CREOLE = "creole",
+    TITLEMARKUP_PLAINTEXT = "plaintext"
+}
+
+public enum RepositoryScm {
+    REPOSITORYSCM_GIT = "git"
+}
+
+public enum RepositoryForkPolicy {
+    REPOSITORYFORKPOLICY_ALLOWFORKS = "allow_forks",
+    REPOSITORYFORKPOLICY_NOPUBLICFORKS = "no_public_forks",
+    REPOSITORYFORKPOLICY_NOFORKS = "no_forks"
+}
+
+public enum ParticipantRole {
+    PARTICIPANTROLE_PARTICIPANT = "PARTICIPANT",
+    PARTICIPANTROLE_REVIEWER = "REVIEWER"
+}
+
+public enum ParticipantState {
+    PARTICIPANTSTATE_APPROVED = "approved",
+    PARTICIPANTSTATE_CHANGESREQUESTED = "changes_requested"
+}
+
+public enum ContentMarkup {
+    CONTENTMARKUP_MARKDOWN = "markdown",
+    CONTENTMARKUP_CREOLE = "creole",
+    CONTENTMARKUP_PLAINTEXT = "plaintext"
+}
+
+public enum SummaryMarkup {
+    SUMMARYMARKUP_MARKDOWN = "markdown",
+    SUMMARYMARKUP_CREOLE = "creole",
+    SUMMARYMARKUP_PLAINTEXT = "plaintext"
+}
+
+public enum PullrequestState {
+    PULLREQUESTSTATE_MERGED = "MERGED",
+    PULLREQUESTSTATE_SUPERSEDED = "SUPERSEDED",
+    PULLREQUESTSTATE_OPEN = "OPEN",
+    PULLREQUESTSTATE_DECLINED = "DECLINED"
+}
