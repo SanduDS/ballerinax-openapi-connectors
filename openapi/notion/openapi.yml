@@ -3,7 +3,12 @@ servers:
   - url: https://api.notion.com
 info:
   contact: {}
-  description: Ballerina Client for Notion API
+  description: >-
+    Notion is an application that provides all-in-one workspace where you can write, plan, collaborate and get organized.
+    it has components such as notes, databases, kanban boards, wikis, calendars, and reminders. You can connect these 
+    components to take notes, add tasks, manage projects & more. Notion provides the building blocks and you can 
+    create your own layouts and toolkit to get work done. This ballerina connector allows you to connect Notion through its
+    REST API.
   title: Notion API - Public Beta
   version: 1.0.0
   x-apisguru-categories:
@@ -15,6 +20,9 @@ info:
       url: https://www.postman.com/collections/15568543-d990f9b7-98d3-47d3-9131-4866ab9c6df2
       version: 2.x
   x-providerName: notion.com
+  x-init-description: >-
+    x-The connector initialization requires setting the API credentials. Create a [Notion account](https://www.notion.so/) 
+    and obtain tokens following [this guide](https://developers.notion.com/docs/authorization).
 tags:
   - name: Users
   - name: Databases

@@ -27,12 +27,16 @@ public type ClientConfig record {
     http:ClientSecureSocket secureSocketConfig?;
 };
 
-# Ballerina Client for Notion API
-#
+# Notion is an application that provides all-in-one workspace where you can write, plan, collaborate and get organized.
+# it has components such as notes, databases, kanban boards, wikis, calendars, and reminders. You can connect these 
+# components to take notes, add tasks, manage projects & more. Notion provides the building blocks and you can 
+# create your own layouts and toolkit to get work done. This ballerina connector allows you to connect Notion through its
+# REST API.
 # + clientEp - Connector http endpoint
 public client class Client {
     http:Client clientEp;
-    # Client initialization.
+    # The connector initialization requires setting the API credentials. Create a [Notion account](https://www.notion.so/)
+    #  and obtain tokens following [this guide](https://developers.notion.com/docs/authorization).
     #
     # + clientConfig - Client configuration details
     # + serviceUrl - Connector server URL
