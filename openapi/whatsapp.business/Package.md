@@ -9,7 +9,7 @@ This package provides the capability to communicate with customers all over the 
 ### Compatibility
 |                       | Version         |
 |-----------------------|-----------------|
-| Ballerina Language    | Swan Lake 2201.0.0|
+| Ballerina Language    | Swan Lake 2201.3.1|
 | WhatsApp Business API | v2.21.4         |
 
 ## Report issues
